@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scally | Закрытый клуб</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-image: url('scally_bg.png');
+            --bg-overlay: rgba(5, 5, 8, 0.55); /* Лёгкое затемнение для контраста текста */
+            --text-color: #ffffff;
+            --text-muted: #d0d0d0;
+            --accent-purple: #7b2fff;
+            --accent-purple-glow: rgba(123, 47, 255, 0.8);
+            --accent-red: #ff004d;
+            --accent-gradient: linear-gradient(135deg, var(--accent-purple), var(--accent-red));
+            --container-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: #050508;
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Тёмный оверлей поверх фона, чтобы текст не сливался */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            z-index: -1;
+        }
+
+        /* Контентный слой */
+        .site-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- БАННЕР С НЕОНОВОЙ РАМКОЙ --- */
+        .banner-container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto 30px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #4a1c71;
+            box-shadow: 0 0 25px var(--accent-purple-glow), inset 0 0 15px rgba(123, 47, 255, 0.3);
+            background: #000;
+            transition: all 0.3s ease;
+        }
+
+        .banner-container:hover {
+            box-shadow: 0 0 35px var(--accent-purple-glow), inset 0 0 20px rgba(123, 47, 255, 0.5);
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* --- HEADER / NAV --- */
+        header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent-purple);
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            text-shadow: 0 0 12px var(--accent-purple);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 40px 0 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 1px solid var(--accent-red);
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            background: rgba(5, 5, 8, 0.8);
+            box-shadow: 0 0 10px rgba(255, 0, 77, 0.4);
+        }
+
+        /* ЧЁТКИЙ ЗАГОЛОВОК */
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(48px, 10vw, 84px);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            line-height: 1;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px var(--accent-purple-glow);
+        }
+
+        .hero p {
+            font-size: clamp(14px, 2vw, 18px);
+            color: #ffffff;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* --- КОНТРАСТНЫЕ КНОПКИ С ТЁМНОЙ ПОДЛОЖКОЙ --- */
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 38px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Основная кнопка */
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            border: 1px solid var(--accent-purple);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(123, 47, 255, 0.6);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-purple-glow), 0 0 40px rgba(255, 0, 77, 0.8);
+        }
+
+        /* Вторая кнопка (теперь со строгой тёмной подложкой, видна на фарах) */
+        .btn-secondary {
+            background: rgba(10, 10, 15, 0.85);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
+            background: rgba(20, 15, 30, 0.95);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.9), 0 0 25px var(--accent-purple-glow);
+        }
+
+        /* --- SECTION TITLES --- */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        /* --- PHILOSOPHY SECTION --- */
+        .philosophy {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .philosophy-card {
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .philosophy-card:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 25px var(--accent-purple-glow);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent-red);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* --- CONTACTS SECTION --- */
+        .contacts-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+
+        .social-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 30px 20px;
+            background: rgba(10, 10, 15, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-purple-glow);
+            background: rgba(20, 15, 30, 0.95);
+        }
+
+        .social-icon {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background 0.3s;
+        }
+
+        .social-card:hover .social-icon {
+            background: var(--accent-gradient);
+        }
+
+        .social-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-handle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-red);
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .footer-status {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(0, 255, 100, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(0, 255, 100, 0.2);
+            border-radius: 10px;
+            font-size: 11px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero { padding: 40px 0 40px; }
+            .section-subtitle { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Основной контентный слой -->
+    <div class="site-wrapper">
+        
+        <!-- Header -->
+        <header>
+            <a href="#" class="logo">SCALLY<span>.</span></a>
+            <nav class="nav-menu">
+                <a href="#concept" class="nav-link">Концепция</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
+                <a href="#status" class="nav-link">Статус клуба</a>
+            </nav>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-badge">● Закрытый доступ</div>
+            
+            <!-- БАННЕР С НЕОНОВОЙ РАМКОЙ -->
+            <div class="banner-container">
+                <img src="https://cdn.discordapp.com/banners/268687282481922049/a_c2b80463d008a9dc7848b2948db8855e.webp?size=1024&animated=true" alt="Scally Banner">
+            </div>
+
+            <h1>SCALLY</h1>
+            <p>
+                Не удивляйся, это закрытый клуб, а не место, куда тебя умоляют вступить. 
+                Здесь царят стиль, тишина nocturnal vibes и скорость. Только те, кто движется в тени, получают доступ.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://discord.gg/8ETVJFv" class="btn-pill btn-primary">
+                    ✈️ Войти в чат
+                </a>
+                <a href="#contacts" class="btn-pill btn-secondary">
+                    Посмотреть соцсети
+                </a>
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY SECTION -->
+        <section id="concept" class="philosophy">
+            <h2 class="section-title">Философия клуба</h2>
+            <p class="section-subtitle">Принципы, на которых держится весь BITCHBUILD.</p>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="card-icon">◆</div>
+                    <h3 class="card-title">Эксклюзивность</h3>
+                    <p class="card-text">
+                        Мы не верим в массовость. Каждый член клуба — личность, обладающая уникальным вкусом, стилем и целями. Никакой шумной рекламы — только тихое уважение между равными.
+                    </p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="card-icon">◆</div>
+                    <h3 class="card-title">Скорость и Тишина</h3>
+                    <p class="card-text">
+                        Как чёрный SLR на ночной магистрали — мы движемся быстро и бесшумно. Внутри клуба царит атмосфера сосредоточенности, свободная от лишних слов и пустых обещаний.
+                    </p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="card-icon">◆</div>
+                    <h3 class="card-title">Цифровое братство</h3>
+                    <p class="card-text">
+                        Ночь, код, роскошь и игры. Мы объединяем тех, кто живёт в цифровом мире, но ищет реальные связи. Discord, Telegram, VK — наши основные платформы общения.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTS SECTION -->
+        <section id="contacts" class="contacts-section">
+            <h2 class="section-title">Выберите платформу</h2>
+            <p class="section-subtitle">
+                Переходите по ссылкам ниже, чтобы связаться с создателями и членами клуба.
+            </p>
+
+            <div class="social-grid">
+                <!-- Telegram -->
+                <a href="https://t.me/trustonmepls" class="social-card">
+                    <div class="social-icon">✈️</div>
+                    <div>
+                        <div class="social-name">Telegram</div>
+                        <div class="social-handle">@trustonmepls</div>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/whytrustonme" class="social-card">
+                    <div class="social-icon">📷</div>
+                    <div>
+                        <div class="social-name">Instagram</div>
+                        <div class="social-handle">@whytrustonme</div>
+                    </div>
+                </a>
+
+                <!-- VK -->
+                <a href="https://vk.ru/cvxrsxd" class="social-card">
+                    <div class="social-icon" style="font-weight: bold; font-size: 18px;">VK</div>
+                    <div>
+                        <div class="social-name">VKонтакте</div>
+                        <div class="social-handle">cvxrsxd</div>
+                    </div>
+                </a>
+
+                <!-- Discord -->
+                <a href="https://discord.gg/8ETVJFv" class="social-card">
+                    <div class="social-icon">💬</div>
+                    <div>
+                        <div class="social-name">Discord Сервер</div>
+                        <div class="social-handle">Присоединиться</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Кнопка-вызов действия -->
+            <a href="https://t.me/trustonmepls?text=Привет!%20Хочу%20связаться%20по%20поводу..." class="btn-pill btn-primary" style="margin-top: 20px;">
+                💬 Написать сообщение в Telegram
+            </a>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="status">
+            <div class="footer-logo">SCALLY<span>.</span></div>
+            <p class="footer-copy">
+                Личный сайт-визитка. Закрытый клуб для избранных.<br>
+                Не удивляйся, это не место для всех.
+            </p>
+            <div class="footer-status">
+                ● Сервер активен: 24/7
+            </div>
+            <p class="footer-copy" style="margin-top: 20px; font-size: 10px; opacity: 0.5;">
+                © 2024 Scally Club. All rights reserved.
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
